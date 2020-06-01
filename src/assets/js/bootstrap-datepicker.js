@@ -1408,7 +1408,7 @@
             switch (e.keyCode) {
                 case 27: // escape
                     this.hide();
-                    $('body').trigger('bootstrapDatepickerSpecKeyPressed');
+                    $('body').trigger('bootstrapDatepickerSpecKeyPressed2');
                     e.preventDefault();
                     break;
                 case 37: // left
