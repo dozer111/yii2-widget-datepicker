@@ -5,6 +5,7 @@
  *
  * Modifications by Kartik Visweswaran (for Bootstrap 4.x support)
  */
+
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         define(['jquery'], factory);
@@ -14,6 +15,7 @@
         factory(jQuery);
     }
 }(function ($, undefined) {
+
     function UTCDate() {
         return new Date(Date.UTC.apply(Date, arguments));
     }
@@ -692,7 +694,7 @@
                 if (this.o.orientation.x === 'right')
                     left -= calendarWidth - width;
             }
-            // auto x orientation is best-placement: if it crosses a window
+                // auto x orientation is best-placement: if it crosses a window
             // edge, fudge it sideways
             else {
                 if (offset.left < 0) {
@@ -1405,15 +1407,9 @@
                 focusDate = this.focusDate || this.viewDate;
             switch (e.keyCode) {
                 case 27: // escape
-                    if (this.focusDate) {
-                        this.focusDate = null;
-                        this.viewDate = this.dates.get(-1) || this.viewDate;
-                        this.fill();
-                    }
-                    else
-                        this.hide();
+                    this.hide();
+                    $('body').trigger('bootstrapDatepickerSpecKeyPressed');
                     e.preventDefault();
-                    e.stopPropagation();
                     break;
                 case 37: // left
                 case 38: // up
@@ -1458,7 +1454,12 @@
                     break;
                 case 13: // enter
                     if (!this.o.forceParse)
+                    {
+                        this.hide();
+                        $('body').trigger('bootstrapDatepickerSpecKeyPressed');
+                        e.preventDefault();
                         break;
+                    }
                     focusDate = this.focusDate || this.dates.get(-1) || this.viewDate;
                     if (this.o.keyboardNavigation) {
                         this._toggle_multidate(focusDate);
@@ -1472,8 +1473,12 @@
                         e.preventDefault();
                         e.stopPropagation();
                         if (this.o.autoclose)
+                        {
                             this.hide();
+                        }
+
                     }
+
                     break;
                 case 9: // tab
                     this.focusDate = null;
@@ -1944,24 +1949,24 @@
             return date.join('');
         },
         headTemplate: '<thead>' +
-        '<tr>' +
-        '<th colspan="7" class="datepicker-title"></th>' +
-        '</tr>' +
-        '<tr>' +
-        '<th class="prev">' + defaults.templates.leftArrow + '</th>' +
-        '<th colspan="5" class="datepicker-switch"></th>' +
-        '<th class="next">' + defaults.templates.rightArrow + '</th>' +
-        '</tr>' +
-        '</thead>',
+            '<tr>' +
+            '<th colspan="7" class="datepicker-title"></th>' +
+            '</tr>' +
+            '<tr>' +
+            '<th class="prev">' + defaults.templates.leftArrow + '</th>' +
+            '<th colspan="5" class="datepicker-switch"></th>' +
+            '<th class="next">' + defaults.templates.rightArrow + '</th>' +
+            '</tr>' +
+            '</thead>',
         contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>',
         footTemplate: '<tfoot>' +
-        '<tr>' +
-        '<th colspan="7" class="today"></th>' +
-        '</tr>' +
-        '<tr>' +
-        '<th colspan="7" class="clear"></th>' +
-        '</tr>' +
-        '</tfoot>'
+            '<tr>' +
+            '<th colspan="7" class="today"></th>' +
+            '</tr>' +
+            '<tr>' +
+            '<th colspan="7" class="clear"></th>' +
+            '</tr>' +
+            '</tfoot>'
     };
     DPGlobal.template = '<div class="datepicker">' +
         '<div class="datepicker-days">' +
