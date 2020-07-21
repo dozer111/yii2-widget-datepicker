@@ -734,11 +734,10 @@
 
             // for BHM, we need to show datepicker behind help-block
             let inputHelpBlock = this.element.closest('.form-group').find('.help-block');
-            let DEFAUTL_MOVEDOWN_ON_ERROR = 27;
             if (inputHelpBlock.is(':visible')) {
-                let additionalMargin = new Number(inputHelpBlock.attr('data-datepicker-movedown'));
-                top += additionalMargin > 0 ? additionalMargin : DEFAUTL_MOVEDOWN_ON_ERROR;
+                top += inputHelpBlock.height()+7;
             }
+
 
             if (this.o.rtl) {
                 var right = windowWidth - (left + width);
@@ -1420,7 +1419,7 @@
                     $('body').trigger('bootstrapDatepickerSpecKeyPressed2');
                     e.preventDefault();
                     break;
-                    // no need for now in this
+                // no need for now in this
                 // case 37: // left
                 // case 38: // up
                 // case 39: // right
